@@ -22,7 +22,7 @@ ro.lmk.use_psi=false
 
 # Keystore
 ro.arch=exynos8895
-ro.hardware.keystore=mdfpp
+#ro.hardware.keystore=mdfpp
 
 # Media
 debug.stagefright.ccodec=0
