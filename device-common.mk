@@ -39,7 +39,9 @@ PRODUCT_PACKAGES += \
     libeffects \
     libspeexresampler \
     libaudioutils \
-    libtinycompress
+    libstagefright_softomx \
+    libtinycompress \
+    libstagefright_softomx_plugin
 
 PRODUCT_PACKAGES += \
     SamsungDAP
