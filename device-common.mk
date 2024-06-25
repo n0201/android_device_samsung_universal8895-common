@@ -39,7 +39,9 @@ PRODUCT_PACKAGES += \
     libeffects \
     libspeexresampler \
     libaudioutils \
-    libtinycompress
+    libstagefright_softomx \
+    libtinycompress \
+    libstagefright_softomx_plugin
 
 PRODUCT_PACKAGES += \
     SamsungDAP
@@ -128,19 +130,22 @@ PRODUCT_PACKAGES += \
 # Gatekeeper
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service \
-    android.hardware.gatekeeper@1.0-impl
+    android.hardware.gatekeeper@1.0-impl \
+    libgatekeeper
 
 # Graphics
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.2-service \
-    android.hardware.graphics.mapper@2.0-impl
+    android.hardware.graphics.mapper@2.0-impl \
+    libion \
+    libutilscallstack
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-impl \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
 
 # HotwordEnrollement app permissions
 PRODUCT_COPY_FILES += \
@@ -171,10 +176,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libsuspend
 
-# Soft OMX
-PRODUCT_PACKAGES += \
-    libstagefright_soft_g711dec
-
 # Media
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
@@ -203,6 +204,13 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras \
     android.hardware.nfc@1.2-service.samsung
+
+## This is a workaround for the Bluetooth sanitize shadow call stack (SCS)
+## crash reported here: https://issuetracker.google.com/issues/302408537,
+## until the new version Mali binaries released.
+## For details of the root cause and the cts vts tests comparison between
+## the preloading and non-preloading builds, please check the above issue.
+PRODUCT_PROPERTY_OVERRIDES += ro.zygote.disable_gl_preload=1
 
 # Power
 PRODUCT_PACKAGES += \
@@ -279,6 +287,8 @@ PRODUCT_PACKAGES += \
     android.hardware.radio@1.3 \
     android.hardware.radio@1.4 \
     libxml2 \
+    libnetutils \
+    libsqlite \
     secril_config_svc
 
 # SamsungDoze
